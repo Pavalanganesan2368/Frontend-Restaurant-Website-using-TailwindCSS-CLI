@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./dist/output.css" />
+    <script src="./script.js" defer></script>
+    <title>Restaurant Website</title>
+  </head>
+  <body class="w-full max-w-7xl mx-auto relative">
+    <nav
+      class="w-full bg-yellow-300 h-14 p-3 sticky z-[999] top-0 flex items-center justify-between"
+    >
+      <div class="text-xl font-[cursive] font-bold">Man Eater</div>
+
+      <div
+        id="nav_items"
+        class="md:flex flex-col hidden md:flex-row font-semibold text-sm fixed md:static z-[90] top-14 left-0 w-full md:w-max text-black bg-yellow-300 items-center gap-3 py-4 md:py-0"
+      >
+        <div class="cursor-pointer mx-auto w-max px-4 py-2">
+          <a href="#">Home</a>
+        </div>
+        <div class="cursor-pointer mx-auto w-max px-4 py-2">
+          <a href="#menu_section">Restaurant</a>
+        </div>
+        <div class="cursor-pointer mx-auto w-max px-4 py-2">
+          <a href="#" id="cart_nav">Cart <span id="cart_badge" class="bg-red-500 text-white rounded-full px-2 py-0.5 text-xs hidden">0</span></a>
+        </div>
+        <div class="cursor-pointer mx-auto w-max px-4 py-2">
+          <a href="#" id="orders_nav">My Orders</a>
+        </div>
+        <div
+          class="cursor-pointer mx-auto w-max px-4 py-1 bg-black shadow-lg text-white rounded-lg"
+        >
+          <a href="#">Login</a>
+        </div>
+        <div
+          class="cursor-pointer mx-auto w-max px-4 py-1 bg-white shadow-lg rounded-lg"
+        >
+          <a href="#">Sign Up</a>
+        </div>
+      </div>
+
+      <button id="nav_btn" class="md:hidden">
+        <i
+          class="fa-solid fa-bars text-2xl hover:text-white transition-all"
+        ></i>
+      </button>
+    </nav>
+
+    <div class="carousel relative overflow-hidden w-full mx-auto">
+      <div class="carousel-inner flex transition-transform duration-500">
+        <div class="carousel-item w-full shrink-0">
+          <img
+            src="./public/image1.jpg"
+            class="w-full h-auto object-cover aspect-[32/9] max-md:aspect-[16/9]"
+            alt=""
+          />
+        </div>
+        <div class="carousel-item w-full shrink-0">
+          <img
+            src="./public/image2.jpg"
+            class="w-full h-auto object-cover aspect-[32/9] max-md:aspect-[16/9]"
+            alt=""
+          />
+        </div>
+        <div class="carousel-item w-full shrink-0">
+          <img
+            src="./public/image3.jpg"
+            class="w-full h-auto object-cover aspect-[32/9] max-md:aspect-[16/9]"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <button
+        id="prev"
+        class="absolute top-1/2 left-4 bg-yellow-300 p-2 rounded-full px-4 transform -translate-y-1/2 text-black disabled:opacity-25"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button
+        id="next"
+        class="absolute top-1/2 right-4 bg-yellow-300 p-2 rounded-full px-4 transform -translate-y-1/2 text-black disabled:opacity-25"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- NEW MENU SECTION -->
+    <section id="menu_section" class="w-full my-8 max-md:px-5 px-10">
+      <div class="flex flex-col md:flex-row justify-between items-center pb-4 border-b-2 border-gray-300 mb-6 gap-4">
+        <h2 class="text-2xl font-semibold">Our Menu</h2>
+        <div class="flex items-center gap-2 w-full md:w-auto relative">
+          <i class="fa-solid fa-search absolute left-3 text-gray-400"></i>
+          <input type="text" id="search_input" placeholder="Search food..." class="border border-gray-400 rounded-lg pl-9 pr-3 py-2 outline-none w-full md:w-64 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400">
+        </div>
+      </div>
+      
+      <div id="category_filters" class="flex flex-wrap gap-3 mb-8 justify-center md:justify-start">
+        <button class="filter-btn active bg-yellow-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="All">All</button>
+        <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="Starters">Starters</button>
+        <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="Main Course">Main Course</button>
+        <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="Pizza">Pizza</button>
+        <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="Burgers">Burgers</button>
+        <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="Desserts">Desserts</button>
+        <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="Beverages">Beverages</button>
+        <button class="filter-btn bg-red-100 text-red-600 hover:bg-red-200 px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-colors" data-category="Favorites"><i class="fa-solid fa-heart mr-1"></i> Favorites</button>
+      </div>
+
+      <div id="menu_grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+        <!-- Menu cards will be injected here -->
+      </div>
+      <div id="no_food_msg" class="hidden text-center text-gray-500 py-10 w-full text-lg">
+        <i class="fa-solid fa-utensils text-4xl mb-3 text-gray-300 block"></i>
+        No food found matching your criteria.
+      </div>
+    </section>
+
+    <!-- KEEPING EXISTING SECTIONS WITH LOCAL DATA -->
+    <section class="w-full my-5 max-md:px-5">
+      <h2 class="pb-4 border-b-2 border-gray-300 text-xl w-full font-semibold">
+        Exciting Offering
+      </h2>
+      <div id="exciting" class="slider-container relative w-full my-5 mx-auto">
+        <div class="slider flex gap-4 pb-4 overflow-x-hidden">
+          <button
+            id="prevBtn"
+            class="absolute top-1/2 left-4 bg-yellow-300 rounded-full px-4 transform -translate-y-1/2 text-black disabled:opacity-25 prevBtn"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button
+            id="nextBtn"
+            class="absolute top-1/2 right-4 bg-yellow-300 rounded-full px-4 transform -translate-y-1/2 text-black disabled:opacity-25 nextBtn"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="w-full my-5 max-md:px-5">
+      <h2 class="pb-4 border-b-2 border-gray-300 text-xl w-full font-semibold">
+        European Delight
+      </h2>
+      <div id="european" class="slider-container relative w-full my-5 mx-auto">
+        <div class="slider flex gap-4 pb-4 overflow-x-hidden">
+          <button
+            id="prevBtn"
+            class="absolute top-1/2 left-4 bg-yellow-300 rounded-full px-4 transform -translate-y-1/2 text-black disabled:opacity-25 prevBtn"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button
+            id="nextBtn"
+            class="absolute top-1/2 right-4 bg-yellow-300 rounded-full px-4 transform -translate-y-1/2 text-black disabled:opacity-25 nextBtn"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="w-full bg-yellow-300 mt-10 px-10 py-5 text-center text-black"
+    >
+      <div
+        class="text-xl text-white font-bold max-md:text-sm shadow-xl bg-[linear-gradient(to_right,theme(colors.orange.500),theme(colors.blue.800))] rounded-full px-4 py-2 w-max mx-auto mb-6"
+      >
+        Free Delivery with Premium Plan
+      </div>
+
+      <p class="mb-6 max-md:text-xs">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat
+        esse libero optio id enim ad facilis sunt? Sunt repellendus vitae
+        perspiciatis libero! Magni beatae similique incidunt? Nulla, omnis odio.
+      </p>
+
+      <div class="text-5xl font-bold w-full text-center my-6">
+        just <i class="fa-solid fa-indian-rupee-sign"></i>99/month
+      </div>
+    </section>
+
+    <footer id="footer" class="bg-gray-800 text-white">
+      <div
+        class="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16"
+      >
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <div class="text-yellow-300 font-[cursive] text-4xl font-semibold">
+            Man Eater
+          </div>
+
+          <ul class="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
+            <li>
+              <a href="#" class="text-gray-300 hover:opacity-75 transition"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-300 hover:opacity-75 transition"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="grid grid-cols-1 gap-8 border-t border-gray-700 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-16"
+        >
+          <div>
+            <p class="text-gray-100 font-medium">Features</p>
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Restaurants</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Categories</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Locations</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-gray-100 font-medium">Company</p>
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Meet the team</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">About</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-gray-100 font-medium">Helpful Links</p>
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Contact</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">FAQs</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Live Chat</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-gray-100 font-medium">Legal</p>
+            <ul class="mt-6 space-y-4 text-sm">
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Accessibility</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Return Policy</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-300 hover:text-white transition">Refund Policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-xs text-gray-500">
+          &copy; 2024. Man Eater. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- MODALS -->
+
+    <!-- Cart Modal -->
+    <div id="cart_modal" class="fixed inset-0 bg-black/50 z-[9999] hidden items-center justify-center p-4">
+      <div class="bg-white w-full max-w-md rounded-lg shadow-xl p-5 max-h-[90vh] flex flex-col relative transform transition-all">
+        <button id="close_cart" class="absolute top-4 right-4 text-gray-500 hover:text-black transition"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <h2 class="text-xl font-bold mb-4 border-b pb-3"><i class="fa-solid fa-cart-shopping mr-2"></i>Your Cart</h2>
+        <div id="cart_items" class="flex-1 overflow-y-auto flex flex-col gap-4 min-h-[150px] pr-2">
+          <!-- Cart items injected here -->
+        </div>
+        <div class="mt-5 border-t pt-4">
+          <div class="flex justify-between font-bold text-xl mb-4 text-gray-800">
+            <span>Total:</span>
+            <span class="text-green-600"><i class="fa-solid fa-indian-rupee-sign"></i><span id="cart_total">0</span></span>
+          </div>
+          <div class="flex gap-3">
+            <button id="clear_cart" class="flex-1 bg-gray-200 text-black py-3 rounded-lg font-bold hover:bg-gray-300 transition">Clear Cart</button>
+            <button id="checkout_btn" class="flex-1 bg-yellow-400 py-3 rounded-lg font-bold text-black shadow hover:bg-yellow-500 transition">Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout_modal" class="fixed inset-0 bg-black/50 z-[9999] hidden items-center justify-center p-4">
+      <div class="bg-white w-full max-w-md rounded-lg shadow-xl p-5 max-h-[90vh] overflow-y-auto relative">
+        <button id="close_checkout" class="absolute top-4 right-4 text-gray-500 hover:text-black"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <h2 class="text-xl font-bold mb-4 border-b pb-3">Checkout</h2>
+        <form id="checkout_form" class="flex flex-col gap-4">
+          <div>
+            <label class="block text-sm font-semibold mb-1">Full Name</label>
+            <input type="text" id="checkout_name" placeholder="John Doe" required class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-yellow-400">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1">Phone Number</label>
+            <input type="tel" id="checkout_phone" placeholder="1234567890" required class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-yellow-400">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1">Delivery Address</label>
+            <textarea id="checkout_address" placeholder="123 Main St..." required class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-yellow-400 h-20"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold mb-1">Optional Instructions</label>
+            <textarea id="checkout_instructions" placeholder="Leave at door..." class="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-yellow-400 h-16"></textarea>
+          </div>
+          
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mt-2">
+            <h3 class="font-bold mb-3 border-b pb-2">Order Summary</h3>
+            <div class="flex justify-between text-sm mb-2 text-gray-600"><span>Subtotal:</span><span><i class="fa-solid fa-indian-rupee-sign"></i><span id="checkout_subtotal">0</span></span></div>
+            <div class="flex justify-between text-sm mb-3 text-gray-600"><span>Delivery Charge:</span><span><i class="fa-solid fa-indian-rupee-sign"></i>40</span></div>
+            <div class="flex justify-between font-bold text-lg pt-2 border-t border-gray-300 text-black"><span>Final Total:</span><span class="text-green-600"><i class="fa-solid fa-indian-rupee-sign"></i><span id="checkout_final">0</span></span></div>
+          </div>
+          <button type="submit" class="w-full bg-green-500 text-white py-3 rounded-lg font-bold shadow hover:bg-green-600 transition mt-2">Place Order</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmation_modal" class="fixed inset-0 bg-black/50 z-[9999] hidden items-center justify-center p-4">
+      <div class="bg-white w-full max-w-sm rounded-lg shadow-xl p-8 text-center relative">
+        <button id="close_confirmation" class="absolute top-4 right-4 text-gray-500 hover:text-black"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <div class="text-green-500 text-6xl mb-4 animate-bounce"><i class="fa-solid fa-circle-check"></i></div>
+        <h2 class="text-2xl font-bold mb-2">Order Confirmed!</h2>
+        <p class="text-gray-600 mb-2">Order ID: <span id="confirm_order_id" class="font-bold text-black"></span></p>
+        <p class="text-gray-800 font-bold mb-2">Total Amount: <i class="fa-solid fa-indian-rupee-sign"></i><span id="confirm_total"></span></p>
+        <p class="mb-6 bg-blue-50 text-blue-700 py-2 rounded-lg font-semibold inline-block px-4">Status: <span id="confirm_status">Preparing</span></p>
+        <button id="btn_view_orders" class="w-full bg-yellow-400 text-black py-3 rounded-lg font-bold shadow hover:bg-yellow-500 transition">View My Orders</button>
+      </div>
+    </div>
+
+    <!-- Orders History Modal -->
+    <div id="orders_modal" class="fixed inset-0 bg-black/50 z-[9999] hidden items-center justify-center p-4">
+      <div class="bg-white w-full max-w-2xl rounded-lg shadow-xl p-6 max-h-[90vh] flex flex-col relative">
+        <button id="close_orders" class="absolute top-4 right-4 text-gray-500 hover:text-black"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <h2 class="text-2xl font-bold mb-4 border-b pb-3"><i class="fa-solid fa-list-ul mr-2"></i>My Orders</h2>
+        <div id="orders_list" class="flex-1 overflow-y-auto flex flex-col gap-4 pr-2">
+          <!-- Orders injected here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Details Modal -->
+    <div id="food_details_modal" class="fixed inset-0 bg-black/50 z-[9999] hidden items-center justify-center p-4">
+      <div class="bg-white w-full max-w-3xl rounded-lg shadow-xl overflow-hidden flex flex-col md:flex-row relative">
+        <button id="close_food_details" class="absolute top-3 right-3 text-white md:text-gray-500 z-10 bg-black/40 md:bg-transparent rounded-full w-8 h-8 flex items-center justify-center hover:text-black transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <div class="w-full md:w-1/2 h-64 md:h-auto relative">
+          <img id="detail_img" src="" alt="" class="w-full h-full object-cover">
+          <button id="detail_fav" class="absolute top-4 left-4 text-2xl text-white drop-shadow-md hover:text-red-500 transition"><i class="fa-solid fa-heart"></i></button>
+        </div>
+        <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
+          <div>
+            <p id="detail_category" class="text-sm text-gray-500 mb-1 font-bold uppercase tracking-wider"></p>
+            <h2 id="detail_name" class="text-3xl font-bold mb-3 text-gray-800"></h2>
+            <p id="detail_desc" class="text-gray-600 mb-6 leading-relaxed"></p>
+            <div class="text-3xl font-bold text-green-600 mb-8"><i class="fa-solid fa-indian-rupee-sign text-2xl"></i><span id="detail_price"></span></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="flex items-center border-2 border-gray-200 rounded-lg bg-gray-50">
+              <button id="detail_dec" class="px-4 py-2 text-xl font-bold text-gray-600 hover:text-black">-</button>
+              <span id="detail_qty" class="px-4 font-bold text-lg w-12 text-center">1</span>
+              <button id="detail_inc" class="px-4 py-2 text-xl font-bold text-gray-600 hover:text-black">+</button>
+            </div>
+            <button id="detail_add_cart" class="flex-1 bg-red-500 text-white font-bold text-lg py-2 rounded-lg shadow hover:bg-red-600 transition flex items-center justify-center gap-2"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
